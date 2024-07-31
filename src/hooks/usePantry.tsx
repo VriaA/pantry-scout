@@ -4,11 +4,12 @@ import { AppContext } from "@/contexts/AppContext";
 import { TAppContext } from "@/types/app";
 import { db } from "@/firebase";
 import { useContext, useEffect, useState } from "react";
-import { collection, where, orderBy, query, onSnapshot, DocumentData, doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { collection, where, orderBy, query, onSnapshot, DocumentData, doc, addDoc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 
 type TUsePantry = {
     pantryItems: DocumentData[] | null;
     loading: boolean;
+    addItem: (newItem: FormDataEntryValue) => void;
     deleteItem: (id: "string") => void;
     increaseQuantityByOne: (id: string, prevQuantity: number) => void;
     decreaseQuantityByOne: (id: string, prevQuantity: number) => void;
@@ -49,7 +50,16 @@ export default function usePantry(): TUsePantry {
         return () => unsubscribe();
     }, [signedInUser, setDialog, openDialog]);
 
-    function deleteItem(id: 'string') {
+    function addItem(newItem: FormDataEntryValue) {
+        addDoc(collection(db, "pantry"), {
+            name: newItem,
+            quantity: 1,
+            userId: signedInUser?.uid,
+            timestamp: serverTimestamp()
+        })
+    }
+
+    function deleteItem(id: string) {
         setLoading(() => true)
         try {
             deleteDoc(doc(db, "pantry", id))
@@ -93,5 +103,5 @@ export default function usePantry(): TUsePantry {
         }
     }
 
-    return { pantryItems, loading, deleteItem, increaseQuantityByOne, decreaseQuantityByOne }
+    return { pantryItems, loading, addItem, deleteItem, increaseQuantityByOne, decreaseQuantityByOne }
 }

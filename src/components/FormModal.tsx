@@ -5,34 +5,36 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { addDoc, serverTimestamp, collection } from "firebase/firestore"
-import { db } from "@/firebase"
 import { AppContext } from '@/contexts/AppContext';
 import { TAppContext } from '@/types/app';
+import usePantry from "@/hooks/usePantry";
 
 type TFormModal = {
-    isOpen: boolean;
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function FormModal({isOpen, setIsOpen}: TFormModal) {
-  const { setDialog, openDialog, signedInUser } = React.useContext(AppContext) as TAppContext
+export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
+  const { setDialog, openDialog } = React.useContext(AppContext) as TAppContext
+  const { pantryItems, increaseQuantityByOne, addItem } = usePantry()
 
-  function addItem(formData: FormData) {
-    const newItem =  formData.get('item')
+  function handleAddBtnClick(formData: FormData) {
+    const newItem = formData.get('item')
+
     try {
-      addDoc(collection(db, "pantry"), {
-        name: newItem,
-        quantity: 1,
-        userId: signedInUser?.uid,
-        timestamp: serverTimestamp()
-      })
-    } catch(error: any) {
-        setDialog((prev)=> ({...prev, message: error.message}))
-        openDialog()
-      console.log(error)
+      if (!newItem) return
+      if (pantryItems && pantryItems.length > 0) {
+        const itemInPantry = pantryItems.find(item => item.name.toLowerCase() === newItem.toString().toLowerCase())
+        itemInPantry ? increaseQuantityByOne(itemInPantry.docId, itemInPantry.quantity) : addItem(newItem)
+        return
+      }
+      addItem(newItem)
+
+    } catch (error: any) {
+      setDialog((prev) => ({ ...prev, message: error.message }))
+      openDialog()
     } finally {
-        handleClose()
+      handleClose()
     }
   }
 
@@ -45,7 +47,7 @@ export default function FormModal({isOpen, setIsOpen}: TFormModal) {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          action: addItem,
+          action: handleAddBtnClick,
         }}
       >
         <DialogTitle>Subscribe</DialogTitle>
