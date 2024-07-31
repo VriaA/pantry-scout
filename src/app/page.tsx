@@ -10,6 +10,7 @@ import { useContext, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Loading from "./loading"
 import FormModal from "@/components/FormModal";
+import Pantry from "@/components/Pantry";
 
 export default function Home() {
   const { signedInUser } = useContext(AppContext) as TAppContext
@@ -34,6 +35,7 @@ export default function Home() {
         <Add />
       </Fab>
       <FormModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Pantry />
     </Container>
   )
 }
