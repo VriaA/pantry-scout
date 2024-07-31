@@ -4,12 +4,11 @@ import { TAppContext } from "@/types/app"
 import { Container, Typography } from "@mui/material"
 import { useState } from "react";
 import * as React from 'react';
-import Fab from '@mui/material/Fab';
-import { Add } from "@mui/icons-material";
 import { useContext, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import FormModal from "@/components/FormModal";
 import Pantry from "@/components/Pantry";
+import Header from "@/components/Header";
 
 export default function Home() {
   const { signedInUser } = useContext(AppContext) as TAppContext
@@ -29,12 +28,9 @@ export default function Home() {
 
   return (
     <Container>
-      <Typography variant="body1">Pantry Scout</Typography>
-      <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
-        <Add />
-      </Fab>
-      <FormModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Header handleClickOpen={handleClickOpen} />
       <Pantry />
+      <FormModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </Container>
   )
 }
