@@ -5,7 +5,6 @@ import { useEffect, useState, useRef } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase";
 import { TAppContext, TDialog } from "@/types/app";
-
 export const AppContext = createContext<TAppContext | null>(null)
 
 export default function AppContextProvider({ children }: { children: ReactNode }): JSX.Element {

@@ -1,22 +1,23 @@
 "use client";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
-import usePantry from "@/hooks/usePantry";
+import { PantryContext, TPantryContext } from "@/contexts/PantryContext";
+import { useContext } from "react";
 
 export default function Pantry(): JSX.Element {
-    const { pantryItems, loading, deleteItem, increaseQuantityByOne, decreaseQuantityByOne } = usePantry()
+    const { itemsToRender, loading, deleteItem, increaseQuantityByOne, decreaseQuantityByOne } = useContext(PantryContext) as TPantryContext
 
-    if (!pantryItems && loading) {
+    if (!itemsToRender && loading) {
         return <Typography>Loading...</Typography>;
     }
 
-    if (!pantryItems || pantryItems.length === 0) {
+    if (!itemsToRender || itemsToRender.length === 0) {
         return <Typography>No pantry items.</Typography>;
     }
 
     return (
         <Stack>
-            {pantryItems.map((item) => (
+            {itemsToRender.map((item) => (
                 <Box key={item.docId}>
                     <Typography variant="body1">{item.name}</Typography>
                     <Box>
