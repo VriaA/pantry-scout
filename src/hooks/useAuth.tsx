@@ -51,7 +51,6 @@ export function useAuth(): TUseAuth {
     const isSignIn = pathname === "/sign-in";
     const isSignUp = pathname === "/sign-up";
     const isDeleteAccount = pathname === "/delete-account";
-    console.log(isSignIn, isSignUp, isDeleteAccount)
     const router = useRouter();
     const [newUser, setNewUser] = useState<newUser>({
         email: "",

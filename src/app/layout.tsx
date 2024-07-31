@@ -8,7 +8,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Pantry Scout",
   description: "A pantry tracker that allows users to efficiently manage their pantry items. With this application, you can add items to your pantry, edit the quantity of existing items, and remove items from your pantry.",
-  viewport: "initial-scale=1, width=device-width"
 };
 
 export default function RootLayout({

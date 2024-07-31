@@ -15,7 +15,7 @@ export default function Home() {
   const { signedInUser } = useContext(AppContext) as TAppContext
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
-  const handleClickOpen = () =>  setIsOpen(true)
+  const handleClickOpen = () => setIsOpen(true)
 
   useEffect(() => {
     if (signedInUser === null) {
@@ -30,10 +30,10 @@ export default function Home() {
   return (
     <Container>
       <Typography variant="body1">Pantry Scout</Typography>
-                <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
-                    <Add />
-                </Fab>
-                <FormModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
+        <Add />
+      </Fab>
+      <FormModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </Container>
   )
 }
