@@ -16,14 +16,15 @@ type TFormModal = {
 }
 
 export default function FormModal({isOpen, setIsOpen}: TFormModal) {
-  const { setDialog, openDialog } = React.useContext(AppContext) as TAppContext
+  const { setDialog, openDialog, signedInUser } = React.useContext(AppContext) as TAppContext
 
   function addItem(formData: FormData) {
     const newItem =  formData.get('item')
     try {
       addDoc(collection(db, "pantry"), {
         name: newItem,
-        count: 1,
+        quantity: 1,
+        userId: signedInUser?.uid,
         timestamp: serverTimestamp()
       })
     } catch(error: any) {
