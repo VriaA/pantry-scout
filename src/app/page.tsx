@@ -8,7 +8,6 @@ import Fab from '@mui/material/Fab';
 import { Add } from "@mui/icons-material";
 import { useContext, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import Loading from "./loading"
 import FormModal from "@/components/FormModal";
 import Pantry from "@/components/Pantry";
 
@@ -25,7 +24,7 @@ export default function Home() {
   }, [signedInUser, router])
 
   if (!signedInUser) {
-    return <Loading />
+    return <Typography>Loading...</Typography>
   }
 
   return (
