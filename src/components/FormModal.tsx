@@ -50,7 +50,7 @@ export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
           action: handleAddBtnClick,
         }}
       >
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Add an item to your pantry</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
