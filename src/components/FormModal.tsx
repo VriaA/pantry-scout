@@ -7,8 +7,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { AppContext } from '@/contexts/AppContext';
 import { TAppContext } from '@/types/app';
-import usePantry from "@/hooks/usePantry";
 import CameraPro from "./CameraPro";
+import { PantryContext, TPantryContext } from "@/contexts/PantryContext";
 
 type TFormModal = {
   isOpen: boolean;
@@ -17,7 +17,7 @@ type TFormModal = {
 
 export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
   const { setDialog, openDialog } = React.useContext(AppContext) as TAppContext
-  const { pantryItems, increaseQuantityByOne, addItem } = usePantry()
+  const { pantryItems, increaseQuantityByOne, addItem, setImage } = React.useContext(PantryContext) as TPantryContext
 
   function handleAddBtnClick(formData: FormData) {
     const newItem = formData.get('item')
@@ -36,6 +36,7 @@ export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
       openDialog()
     } finally {
       handleClose()
+      setImage(() => undefined)
     }
   }
 
