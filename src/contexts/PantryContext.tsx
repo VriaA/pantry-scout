@@ -64,7 +64,7 @@ export default function PantryContextProvider({ children }: { children: ReactNod
             quantity: 1,
             userId: signedInUser?.uid,
             timestamp: serverTimestamp(),
-            imageSrc: image
+            imageSrc: image ? image : null
         })
     }
 
