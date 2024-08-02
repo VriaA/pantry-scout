@@ -8,6 +8,8 @@ import { collection, where, orderBy, query, onSnapshot, DocumentData, doc, addDo
 export type TPantryContext = {
     itemsToRender: DocumentData[] | null;
     setItemsToRender: React.Dispatch<React.SetStateAction<DocumentData[] | null>>;
+    image: string | ImageData | undefined;
+    setImage: React.Dispatch<React.SetStateAction<string | ImageData | undefined>>;
     pantryItems: DocumentData[] | null;
     loading: boolean;
     addItem: (newItem: FormDataEntryValue) => void;
@@ -23,6 +25,7 @@ export default function PantryContextProvider({ children }: { children: ReactNod
     const [pantryItems, setPantryItems] = useState<DocumentData[] | null>(null);
     const [itemsToRender, setItemsToRender] = useState<DocumentData[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [image, setImage] = useState<string | ImageData | undefined>(undefined);
 
     useEffect(() => {
         if (!signedInUser) return;
@@ -60,7 +63,8 @@ export default function PantryContextProvider({ children }: { children: ReactNod
             name: newItem,
             quantity: 1,
             userId: signedInUser?.uid,
-            timestamp: serverTimestamp()
+            timestamp: serverTimestamp(),
+            image: image
         })
     }
 
@@ -108,7 +112,7 @@ export default function PantryContextProvider({ children }: { children: ReactNod
         }
     }
 
-    const PantryContextValues = { itemsToRender, setItemsToRender, pantryItems, loading, addItem, deleteItem, increaseQuantityByOne, decreaseQuantityByOne }
+    const PantryContextValues = { itemsToRender, setItemsToRender, pantryItems, image, setImage, loading, addItem, deleteItem, increaseQuantityByOne, decreaseQuantityByOne }
 
     return (
         <PantryContext.Provider value={PantryContextValues}>

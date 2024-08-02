@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { AppContext } from '@/contexts/AppContext';
 import { TAppContext } from '@/types/app';
 import usePantry from "@/hooks/usePantry";
+import CameraPro from "./CameraPro";
 
 type TFormModal = {
   isOpen: boolean;
@@ -63,6 +64,7 @@ export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
             fullWidth
             variant="standard"
           />
+          <CameraPro />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
