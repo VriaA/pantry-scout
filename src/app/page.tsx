@@ -27,9 +27,9 @@ export default function Home() {
   }
 
   return (
-    <Container>
+    <Container sx={{ display: 'flex', flexDirection: 'column', height: '100svh' }}>
       <Header handleClickOpen={handleClickOpen} />
-      <Pantry />
+      <Pantry handleClickOpen={handleClickOpen} />
       <FormModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </Container>
   )
