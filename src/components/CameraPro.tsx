@@ -1,14 +1,25 @@
+"use client"
 import { Camera, CameraType } from "react-camera-pro";
-import { useContext, useRef } from "react";
-import { Box, Button, Skeleton } from "@mui/material";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Box, Button, Skeleton, Typography } from "@mui/material";
 import CameraIcon from '@mui/icons-material/Camera';
 import { PantryContext, TPantryContext } from "@/contexts/PantryContext";
+import { CircularProgress } from '@mui/material';
 
-export default function CameraPro(): JSX.Element {
+export default function CameraPro({ isLoadingName, itemName }: { isLoadingName: boolean, itemName: string }): JSX.Element {
     const { image, setImage } = useContext(PantryContext) as TPantryContext
     const camera = useRef<CameraType | null>(null);
+    const [canShowName, setCanShowName] = useState<boolean>(false)
 
     const retakeImage = () => setImage(() => undefined)
+
+    useEffect(() => {
+        if (image && itemName) {
+            setCanShowName(() => true)
+            const nameTimeout = setTimeout(() => setCanShowName(() => false), 3000)
+            return () => clearTimeout(nameTimeout)
+        }
+    }, [itemName, image])
 
     return (
         <Box display="flex" flexDirection='column' gap="12px" sx={{ width: { md: '500px' } }}>
@@ -30,11 +41,14 @@ export default function CameraPro(): JSX.Element {
 
             {image &&
                 <>
-                    <img width={'100%'} src={(image as string)} alt='Taken photo' />
+                    <Box position="relative" sx={{ width: { md: '500px' } }}>
+                        <img width={'100%'} src={(image as string)} alt='Taken photo' />
+                        {isLoadingName && <CircularProgress sx={{ position: 'absolute', display: 'block', zIndex: 3, inset: 0, margin: 'auto', color: '#fff' }} />}
+                        {canShowName && <Typography sx={{ position: 'absolute', top: 0, display: 'grid', placeContent: "center", zIndex: 3, width: "100%", height: "100%", color: '#fff', fontSize: '40px', fontWeight: 700, bgcolor: "#01010140", textAlign: "center" }}>{itemName}</Typography>}
+                    </Box>
                     <Button onClick={retakeImage}>Retake Image</Button>
                 </>
             }
-
         </Box>
     );
 }

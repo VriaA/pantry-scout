@@ -12,7 +12,7 @@ export type TPantryContext = {
     setImage: React.Dispatch<React.SetStateAction<string | ImageData | undefined>>;
     pantryItems: DocumentData[] | null;
     loading: boolean;
-    addItem: (newItem: FormDataEntryValue) => void;
+    addItem: (newItem: string) => void;
     deleteItem: (id: "string") => void;
     increaseQuantityByOne: (id: string, prevQuantity: number) => void;
     decreaseQuantityByOne: (id: string, prevQuantity: number) => void;
@@ -58,7 +58,7 @@ export default function PantryContextProvider({ children }: { children: ReactNod
         return () => unsubscribe();
     }, [signedInUser, setDialog, openDialog]);
 
-    function addItem(newItem: FormDataEntryValue) {
+    function addItem(newItem: string) {
         addDoc(collection(db, "pantry"), {
             name: newItem,
             quantity: 1,

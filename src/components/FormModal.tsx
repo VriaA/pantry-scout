@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -9,6 +11,7 @@ import { AppContext } from '@/contexts/AppContext';
 import { TAppContext } from '@/types/app';
 import CameraPro from "./CameraPro";
 import { PantryContext, TPantryContext } from "@/contexts/PantryContext";
+import classifier from "@/helpers/classifier";
 
 type TFormModal = {
   isOpen: boolean;
@@ -17,10 +20,29 @@ type TFormModal = {
 
 export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
   const { setDialog, openDialog } = React.useContext(AppContext) as TAppContext
-  const { pantryItems, increaseQuantityByOne, addItem, setImage } = React.useContext(PantryContext) as TPantryContext
+  const { pantryItems, increaseQuantityByOne, addItem, setImage, image } = React.useContext(PantryContext) as TPantryContext
+  const [itemName, setItemName] = React.useState<string>('')
+  const [isLoadingName, setIsLoadingName] = React.useState<boolean>(false)
 
-  function handleAddBtnClick(formData: FormData) {
-    const newItem = formData.get('item')
+  React.useEffect(() => {
+    async function getName() {
+      setIsLoadingName(() => true)
+      const name = await classifier(image)
+      setItemName(() => name)
+      setIsLoadingName(() => false)
+    }
+
+    image ? getName() : setItemName(() => '')
+  }, [image])
+
+  function handleNameChange(e: React.ChangeEvent) {
+    const input = e.target as HTMLFormElement
+    setItemName(() => input.value)
+  }
+
+  function handleAddBtnClick(event: React.FormEvent) {
+    event.preventDefault()
+    const newItem = itemName
 
     try {
       if (!newItem) return
@@ -37,6 +59,7 @@ export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
     } finally {
       handleClose()
       setImage(() => undefined)
+      setItemName(() => '')
     }
   }
 
@@ -49,7 +72,7 @@ export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          action: handleAddBtnClick,
+          onSubmit: handleAddBtnClick
         }}
       >
         <DialogTitle>Add an item to your pantry</DialogTitle>
@@ -64,8 +87,10 @@ export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
             type="text"
             fullWidth
             variant="standard"
+            value={itemName}
+            onChange={handleNameChange}
           />
-          <CameraPro />
+          <CameraPro isLoadingName={isLoadingName} itemName={itemName} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
