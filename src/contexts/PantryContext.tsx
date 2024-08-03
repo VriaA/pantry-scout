@@ -1,7 +1,7 @@
 "use client"
 import { AppContext } from "@/contexts/AppContext";
 import { TAppContext } from "@/types/app";
-import { db } from "@/firebase";
+import { db } from "@/libs/firebase";
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { collection, where, orderBy, query, onSnapshot, DocumentData, doc, addDoc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 

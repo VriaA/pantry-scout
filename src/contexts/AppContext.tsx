@@ -3,7 +3,7 @@
 import { createContext, ReactNode } from "react"
 import { useEffect, useState, useRef } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/firebase";
+import { auth } from "@/libs/firebase";
 import { TAppContext, TDialog } from "@/types/app";
 export const AppContext = createContext<TAppContext | null>(null)
 

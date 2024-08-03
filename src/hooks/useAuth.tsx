@@ -1,7 +1,7 @@
 "use client"
 
 import { FormEvent, useState, useContext } from "react";
-import { auth } from "@/firebase"
+import { auth } from "@/libs/firebase"
 
 import {
     User,
