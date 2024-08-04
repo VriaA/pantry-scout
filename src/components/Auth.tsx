@@ -26,7 +26,7 @@ export default function Auth(): JSX.Element {
         <Box className="flex justify-center items-center h-[100svh] max-w-[1536px]">
             <Box className="flex flex-col items-center justify-center w-full md:w-1/2 h-full">
                 <section className="flex flex-col items-center w-full px-10 md:px-0 md:w-[70%]">
-                    <h1 className="self-center text-[52px] md:text-6xl text-zinc-950 font-melodrama font-semibold leading-none">
+                    <h1 className="self-center text-[52px] md:text-6xl lg:text-8xl text-zinc-950 font-melodrama font-semibold leading-none">
                         {isDeleteAccount
                             ? "Sad to see you go!"
                             : `Welcome!`}
