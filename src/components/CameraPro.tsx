@@ -22,20 +22,21 @@ export default function CameraPro({ isLoadingName, itemName }: { isLoadingName: 
     }, [itemName, image])
 
     return (
-        <Box display="flex" flexDirection='column' gap="12px" sx={{ width: { md: '500px' } }}>
+        <Box display="flex" flexDirection='column' gap="12px" sx={{ width: { xs: "100%", md: '500px' }, margin: "12px 0 0 0" }}>
             {!image &&
                 <>
-                    <Box position="relative" display="flex" width="500px" sx={{ height: { xs: '40svh', lg: '300px' } }}>
-                        <Skeleton width="500px" height="100%" variant="rectangular" sx={{ position: 'absolute', top: 0, zIndex: 0 }} />
+                    <Box position="relative" display="flex" width="100%" sx={{ height: { xs: '40svh', lg: '280px' } }}>
+                        <Skeleton width="100%" height="100%" variant="rectangular" sx={{ position: 'absolute', top: 0, zIndex: 0 }} />
                         <CameraIcon fontSize='large' sx={{
-                            position: 'absolute', display: 'block', zIndex: 0, inset: 0, margin: 'auto', fill: '#b3b3b350',
+                            position: 'absolute', display: 'block', zIndex: 0, inset: 0, margin: 'auto', fill: '#99999950',
                         }} />
                         <Camera
                             ref={camera}
                             errorMessages={{ noCameraAccessible: '', permissionDenied: '', switchCamera: '', canvas: '' }}
-                            aspectRatio={16 / 9.6} />
+                            aspectRatio={16 / 8.6} />
                     </Box>
-                    <Button onClick={() => setImage(camera.current?.takePhoto())}>Take photo</Button>
+                    <button type="button" onClick={() => setImage(camera.current?.takePhoto())}
+                        className="py-2 px-6 text-center border border-orange-primary text-orange-primary font-semibold tracking-wide rounded-lg transition-all duration-150 hover:border-yellow-primary hover:bg-yellow-primary hover:text-zinc-900">Take photo (optional)</button>
                 </>
             }
 

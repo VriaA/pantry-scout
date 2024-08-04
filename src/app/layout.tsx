@@ -1,5 +1,7 @@
 import AppContextProvider from "@/contexts/AppContext";
 import PantryContextProvider from "@/contexts/PantryContext";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { themeOverride } from "@/libs/theme";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -21,7 +23,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <AppContextProvider>
           <PantryContextProvider>
-            {children}
+            <ThemeProvider theme={themeOverride}>
+              <CssBaseline />
+              {children}
+            </ThemeProvider>
           </PantryContextProvider>
         </AppContextProvider>
       </body>

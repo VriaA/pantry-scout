@@ -37,11 +37,11 @@ export default function AppContextProvider({ children }: { children: ReactNode }
         <AppContext.Provider value={{ isLoggedIn, signedInUser, openDialog, setDialog }}>
             {children}
             <dialog
-                className={`${dialog.isOpen ? "flex" : ""} flex-col gap-6 items-start w-[70%] max-w-[300px] p-5 backdrop:bg-zinc-900/40 font-inter rounded-lg`}
+                className={`${dialog.isOpen ? "flex" : ""} fixed inset-0 m-auto flex-col gap-6 items-start w-[70%] max-w-[300px] p-5 backdrop:bg-zinc-900/40 font-manrope rounded-lg`}
                 ref={dialogRef}>
                 <p className="text-base font-medium">{dialog.message}</p>
                 <button
-                    className="self-end bg-red-800 text-zinc-100 font-semibold tracking-wide rounded-lg px-[.5em] py-[.25em] ml-6"
+                    className="self-end bg-red-800 text-slate-50 font-semibold tracking-wide rounded-lg px-[.5em] py-[.25em] ml-6"
                     onClick={closeDialog}>
                     Close
                 </button>

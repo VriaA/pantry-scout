@@ -34,9 +34,9 @@ export default function SearchField() {
     }
 
     return (
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+        <Box sx={{ display: 'flex', alignItems: 'flex-end', order: { xs: 3, md: 2 }, width: { xs: "100%", md: "360px", lg: "500px" } }}>
             <Search sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-            <TextField id="input-with-sx" label="Search your pantry" variant="standard" name="seach-term" value={itemToSearch} onChange={handleChange} />
+            <TextField id="input-with-sx" sx={{ width: "100%" }} label="Search your pantry" variant="standard" name="seach-term" value={itemToSearch} onChange={handleChange} />
         </Box>
     );
 }

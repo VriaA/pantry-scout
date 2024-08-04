@@ -72,15 +72,15 @@ export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: handleAddBtnClick
-        }}
-      >
-        <DialogTitle>Add an item to your pantry</DialogTitle>
+          sx: { padding: "20px 0" },
+          onSubmit: handleAddBtnClick,
+        }}>
+        <DialogTitle sx={{ fontFamily: "Melodrama-Variable", fontSize: '36px', lineHeight: 1 }}>Add an item to your pantry</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             required
-            margin="dense"
+            margin="none"
             id="item"
             name="item"
             label="Item Name"
@@ -92,11 +92,12 @@ export default function FormModal({ isOpen, setIsOpen }: TFormModal) {
           />
           <CameraPro isLoadingName={isLoadingName} itemName={itemName} />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-          <Button type="submit">Add item</Button>
+        <DialogActions sx={{ gap: '8px', padding: '0px 20px' }}>
+          <button type="button" onClick={handleClose}
+            className="py-2 px-6 text-center border border-zinc-900 text-zinc-900 font-semibold tracking-wide rounded-lg hover:text-red-600 hover:border-red-600">Close</button>
+          <button type="submit" className="py-2 px-6 font-manrope tracking-wide font-bold bg-cta-primary hover:animate-cta-gradient text-zinc-900 rounded-lg">Add item</button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </React.Fragment >
   );
 }

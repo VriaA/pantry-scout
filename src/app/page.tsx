@@ -1,14 +1,14 @@
 "use client"
 import { AppContext } from "@/contexts/AppContext"
 import { TAppContext } from "@/types/app"
-import { Container, Typography } from "@mui/material"
+import { Container, Typography, CircularProgress } from "@mui/material"
 import { useState } from "react";
 import * as React from 'react';
 import { useContext, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import FormModal from "@/components/FormModal";
 import Pantry from "@/components/Pantry";
-import Header from "@/components/Header";
+import Header from "@/components/Header"
 
 export default function Home() {
   const { signedInUser } = useContext(AppContext) as TAppContext
@@ -23,7 +23,10 @@ export default function Home() {
   }, [signedInUser, router])
 
   if (!signedInUser) {
-    return <Typography>Loading...</Typography>
+    return <div className="fixed h-fit w-fit inset-0 m-auto flex flex-col items-center gap-3">
+      <CircularProgress />
+      <Typography sx={{ fontWeight: 500 }}>Loading...</Typography>
+    </div>
   }
 
   return (
