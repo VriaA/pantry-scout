@@ -42,7 +42,6 @@ export type TUseAuth = {
     updateUserDataOnChange: (e: FormEvent) => void;
     authenticateWithGoogle: () => Promise<any>
     authenticateWithEmailAndPassword: (e: FormEvent) => void;
-    PASSWORD_INPUT_BORDER_CLASS: string;
 }
 
 export function useAuth(): TUseAuth {
@@ -61,17 +60,6 @@ export function useAuth(): TUseAuth {
         isMessageShown: false,
         message: null,
     }));
-
-    const isBothFilled: boolean =
-        newUser.password.trim().split("").length > 0 &&
-        newUser.confirmPassword.trim().split("").length > 0;
-    const isMatch: boolean = newUser.password === newUser.confirmPassword;
-    const PASSWORD_INPUT_BORDER_CLASS =
-        isBothFilled && isMatch
-            ? "border-green-600"
-            : isBothFilled && !isMatch
-                ? "border-red-700"
-                : "border-zinc-300";
 
     const { setDialog, openDialog } = useContext(AppContext) as TAppContext;
     const [loading, setLoading] = useState<boolean>(false)
@@ -230,5 +218,5 @@ export function useAuth(): TUseAuth {
         );
     }
 
-    return { isDeleteAccount, isSignIn, isSignUp, newUser, authError, loading, updateUserDataOnChange, authenticateWithGoogle, authenticateWithEmailAndPassword, PASSWORD_INPUT_BORDER_CLASS }
+    return { isDeleteAccount, isSignIn, isSignUp, newUser, authError, loading, updateUserDataOnChange, authenticateWithGoogle, authenticateWithEmailAndPassword }
 }
