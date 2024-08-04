@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import openai from "@/libs/openai";
 
-export async function GET(req: { url: string | URL }) {
+export async function GET(req: NextRequest) {
   const url = new URL(req.url);
   const searchParams = url.searchParams;
   const ingredientsParam = searchParams.get("ingredients");
