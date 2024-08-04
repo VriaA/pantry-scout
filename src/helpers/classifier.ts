@@ -1,9 +1,4 @@
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true,
-});
+import openai from "@/libs/openai";
 
 export default async function classifier(url: string | ImageData | undefined) {
   const response = await openai.chat.completions.create({
