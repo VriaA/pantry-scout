@@ -59,14 +59,14 @@ export default function RecipeDetails(): JSX.Element | undefined {
                         <section className="flex flex-col gap-3">
                             <h3 className="font-melodrama text-3xl text-zinc-900">Ingredients</h3>
                             <ol className="list-decimal font-manrope text-sm lg:text-base font-medium text-gray-700 tracking-wide">
-                                {ingredients.map(ingredient => (<li>{ingredient}</li>))}
+                                {ingredients.map(ingredient => (<li key={ingredient}>{ingredient}</li>))}
                             </ol>
                         </section>
 
                         <section className="flex flex-col gap-3">
                             <h3 className="font-melodrama text-3xl text-zinc-900">How to prepare</h3>
                             <ol className="list-decimal font-manrope text-sm lg:text-base font-medium text-gray-700 tracking-wide">
-                                {steps.map(step => (<li>{step}</li>))}
+                                {steps.map(step => (<li key={step}>{step}</li>))}
                             </ol>
                         </section>
                     </article>
