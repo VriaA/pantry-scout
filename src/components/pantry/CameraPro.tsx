@@ -47,7 +47,7 @@ export default function CameraPro({ isLoadingName, itemName }: { isLoadingName: 
                         {isLoadingName && <CircularProgress sx={{ position: 'absolute', display: 'block', zIndex: 3, inset: 0, margin: 'auto', color: '#fff' }} />}
                         {canShowName && <Typography sx={{ position: 'absolute', top: 0, display: 'grid', placeContent: "center", zIndex: 3, width: "100%", height: "100%", color: '#fff', fontSize: '40px', fontWeight: 700, bgcolor: "#01010140", textAlign: "center" }}>{itemName}</Typography>}
                     </Box>
-                    <Button onClick={retakeImage}>Retake Image</Button>
+                    <button className="py-2 px-6 text-center border border-orange-primary text-orange-primary font-semibold tracking-wide rounded-lg transition-all duration-150 hover:border-yellow-primary hover:bg-yellow-primary hover:text-zinc-900" onClick={retakeImage}>Retake Image</button>
                 </>
             }
         </Box>
