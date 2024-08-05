@@ -7,6 +7,7 @@ import { collection, where, orderBy, query, onSnapshot, DocumentData, doc, addDo
 
 export type TPantryContext = {
     itemsToRender: DocumentData[] | null;
+    setPantryItems: React.Dispatch<React.SetStateAction<DocumentData[] | null>>;
     setItemsToRender: React.Dispatch<React.SetStateAction<DocumentData[] | null>>;
     image: string | ImageData | undefined;
     setImage: React.Dispatch<React.SetStateAction<string | ImageData | undefined>>;
@@ -112,7 +113,7 @@ export default function PantryContextProvider({ children }: { children: ReactNod
         }
     }
 
-    const PantryContextValues = { itemsToRender, setItemsToRender, pantryItems, image, setImage, loading, addItem, deleteItem, increaseQuantityByOne, decreaseQuantityByOne }
+    const PantryContextValues = { itemsToRender, setItemsToRender, setPantryItems, pantryItems, image, setImage, loading, addItem, deleteItem, increaseQuantityByOne, decreaseQuantityByOne }
 
     return (
         <PantryContext.Provider value={PantryContextValues}>

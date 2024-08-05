@@ -1,8 +1,8 @@
 "use client"
 
 import { FormEvent, useState, useContext } from "react";
-import { auth } from "@/libs/firebase"
-
+import { auth, db } from "@/libs/firebase"
+import { deleteDoc, doc } from "firebase/firestore";
 import {
     User,
     createUserWithEmailAndPassword,
@@ -20,6 +20,7 @@ import {
 import { usePathname, useRouter } from 'next/navigation'
 import { AppContext } from "@/contexts/AppContext";
 import { TAppContext } from "@/types/app"
+import { PantryContext, TPantryContext } from "@/contexts/PantryContext"
 
 type newUser = {
     email: string;
@@ -62,6 +63,7 @@ export function useAuth(): TUseAuth {
     }));
 
     const { setDialog, openDialog } = useContext(AppContext) as TAppContext;
+    const { pantryItems, setPantryItems, setItemsToRender } = useContext(PantryContext) as TPantryContext
     const [loading, setLoading] = useState<boolean>(false)
 
     function updateUserDataOnChange(e: FormEvent): void {
@@ -154,6 +156,7 @@ export function useAuth(): TUseAuth {
                 userCredential = await reauthenticateWithPopup(user, provider);
             }
             if (userCredential) {
+                await deleteUserPantryDate()
                 await deleteUser(user);
                 setDialog((prevDialog) => ({
                     ...prevDialog,
@@ -168,6 +171,16 @@ export function useAuth(): TUseAuth {
             openDialog();
             setLoading(() => false);
         }
+    }
+
+    function deleteUserPantryDate() {
+        if (!pantryItems) return;
+        const promises = pantryItems.map((item) =>
+            deleteDoc(doc(db, "pantry", item.docId)),
+        );
+        setPantryItems(() => []);
+        setItemsToRender(() => []);
+        return Promise.all(promises);
     }
 
     async function createAccount(
