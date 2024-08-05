@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
     const responseText = response.choices[0].message.content;
     const jsonEnd = (responseText as string).lastIndexOf("}") + 3;
     const jsonStart = (responseText as string).indexOf("[");
-
+    console.log(responseText);
     if (jsonStart === -1 || jsonEnd === -1) {
       throw new Error("JSON block not found in response");
     }
