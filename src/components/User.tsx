@@ -104,7 +104,7 @@ export default function User({ style }: TUser) {
                     id="user-menu"
                     role="menu"
                     aria-labelledby="user-menu-trigger"
-                    className="absolute top-[calc(100%+16px)] right-0 z-50 w-fit flex flex-col gap-4 p-4 text-zinc-900 border border-zinc-900 rounded-lg backdrop-blur"
+                    className="absolute top-[calc(100%+16px)] -right-5 md:right-0 z-50 w-fit flex flex-col gap-4 p-4 text-zinc-900 border border-zinc-900 rounded-lg backdrop-blur"
                 >
                     {!isLoggedIn && (
                         <Link
