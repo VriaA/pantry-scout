@@ -11,7 +11,7 @@ export default function Recipe({ recipe, index }: { recipe: TRecipe, index: numb
             <h2 className="w-full text-xl lg:text-3xl tracking-wide font-melodrama capitalize font-semibold break-words" >{name}</h2>
             <p className="font-manrope text-sm lg:text-base font-medium text-gray-700 tracking-wide">{duration}</p>
             <p className="font-manrope text-base font-medium text-gray-800 tracking-wide">{description}</p>
-            <Link href={`/recipes/${index}`} className="font-manrope text-sm lg:text-base font-medium hover:underline text-orange-primary tracking-wide">read more</Link>
+            <p className="font-manrope text-sm lg:text-base font-medium hover:underline text-orange-primary tracking-wide">read more</p>
         </Link>
     );
 }
