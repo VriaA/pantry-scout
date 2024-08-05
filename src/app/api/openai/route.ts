@@ -20,24 +20,23 @@ export async function GET(req: NextRequest) {
   generate recipes, return an array of a maximum of 10 objects containing the name, duration, description, ingredients and the steps to take to complete the recipe. The only text that should be returned is the text in the array of recipes.`;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "user",
-          content: [
+    const response = await fetchWithRetry(
+      () =>
+        openai.chat.completions.create({
+          model: "gpt-4o-mini",
+          messages: [
             {
-              type: "text",
-              text: prompt,
+              role: "user",
+              content: prompt,
             },
           ],
-        },
-      ],
-      max_tokens: 2042,
-      n: 1,
-      stop: null,
-      temperature: 0.7,
-    });
+          max_tokens: 2042,
+          n: 1,
+          stop: null,
+          temperature: 0.7,
+        }),
+      3
+    );
 
     const responseText = response.choices[0].message.content;
     const jsonEnd = (responseText as string).lastIndexOf("}") + 3;
@@ -57,5 +56,17 @@ export async function GET(req: NextRequest) {
       { message: "Failed to fetch recipes" },
       { status: 500 }
     );
+  }
+}
+
+async function fetchWithRetry(
+  fetchFunction: () => Promise<any>,
+  retries: number
+): Promise<any> {
+  try {
+    return await fetchFunction();
+  } catch (error) {
+    if (retries === 1) throw error;
+    return fetchWithRetry(fetchFunction, retries - 1);
   }
 }
