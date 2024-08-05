@@ -11,7 +11,7 @@ export default function Pantry({ handleClickOpen }: { handleClickOpen: () => voi
     const { itemsToRender, loading, deleteItem, increaseQuantityByOne, decreaseQuantityByOne } = useContext(PantryContext) as TPantryContext
 
     if (!itemsToRender && loading) {
-        return <Loader />
+        return <Loader message="Getting the items in your pantry" />
     }
 
     if (!itemsToRender || itemsToRender.length === 0) {

@@ -25,7 +25,7 @@ export default function Home() {
   if (!signedInUser) {
     return <div className="fixed h-fit w-fit inset-0 m-auto flex flex-col items-center gap-3">
       <CircularProgress />
-      <Typography sx={{ fontWeight: 500 }}>Loading...</Typography>
+      <Typography sx={{ fontWeight: 500 }}>Hang tight, verifying your authentication...</Typography>
     </div>
   }
 

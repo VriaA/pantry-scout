@@ -24,7 +24,7 @@ export default function Recipes(): JSX.Element {
     if (!signedInUser) {
         return <div className="fixed h-fit w-fit inset-0 m-auto flex flex-col items-center gap-3">
             <CircularProgress />
-            <Typography sx={{ fontWeight: 500 }}>Loading...</Typography>
+            <Typography sx={{ fontWeight: 500 }}>Hang tight, verifying your authentication...</Typography>
         </div>
     }
 
@@ -38,7 +38,7 @@ export default function Recipes(): JSX.Element {
 
     const DataToRender = () => {
         if (loading) {
-            return <Loader />
+            return <Loader message="Generating recipes" />
         } else {
             if (!recipes || recipes.length < 0) {
                 return <NoRecipes />
