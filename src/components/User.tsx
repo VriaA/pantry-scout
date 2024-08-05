@@ -5,7 +5,7 @@ import { AppContext } from "@/contexts/AppContext";
 import { TAppContext } from "@/types/app";
 import { useCloseOnClickOutside } from "@/hooks/useCloseOnClisckOutside";
 import { auth } from "@/libs/firebase"
-import { Box, CircularProgress, Paper } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 type TUser = {
     style?: string;
