@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const ingredientsParam = searchParams.get("ingredients");
   const ingredients = ingredientsParam ? ingredientsParam.split(",") : null;
 
-  if (!ingredients || ingredients.length === 0) {
+  if (!ingredients || ingredients.length <= 0) {
     return NextResponse.json(
       { message: "No ingredients provided" },
       { status: 400 }
@@ -53,7 +53,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(jsonResponse);
   } catch (error: any) {
-    console.error("Error fetching recipes:", error.message);
     return NextResponse.json(
       { message: "Failed to fetch recipes" },
       { status: 500 }
