@@ -21,14 +21,14 @@ export type TPantryContext = {
 export const PantryContext = createContext<TPantryContext | null>(null)
 
 export default function PantryContextProvider({ children }: { children: ReactNode }): JSX.Element {
-    const { signedInUser, setDialog, openDialog } = useContext(AppContext) as TAppContext;
+    const { signedInUser, setDialog, openDialog, isLoggedIn } = useContext(AppContext) as TAppContext;
     const [pantryItems, setPantryItems] = useState<DocumentData[] | null>(null);
     const [itemsToRender, setItemsToRender] = useState<DocumentData[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [image, setImage] = useState<string | ImageData | undefined>(undefined);
 
     useEffect(() => {
-        if (!signedInUser) return;
+        if (!signedInUser || !isLoggedIn) return;
 
         const q = query(
             collection(db, "pantry"),

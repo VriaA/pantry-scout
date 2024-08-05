@@ -190,7 +190,7 @@ export default function Auth(): JSX.Element {
                 </section>
             </Box>
 
-            <Box className="hidden md:block md:w-1/2 h-full bg-[url(../assets/fruits.webp)] bg-cover bg-left bg-no-repeat"></Box>
+            <Box className="hidden md:block md:w-1/2 h-full bg-[url(../assets/fruits.webp)] bg-cover bg-left bg-no-repeat border-l border-zinc-600"></Box>
         </Box>
     );
 }

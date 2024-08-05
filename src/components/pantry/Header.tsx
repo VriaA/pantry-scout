@@ -2,15 +2,15 @@ import { Add } from "@mui/icons-material";
 import SearchField from "./SearchField";
 import Link from "next/link";
 import { PiChefHat } from "react-icons/pi";
-import User from "./User";
+import User from "@/components/User";
 
 export default function Header({ handleClickOpen }: {
     handleClickOpen: () => void
 }): JSX.Element {
 
     return (
-        <header className="flex flex-wrap h-fit items-center justify-between py-5 gap-3 md:gap-0">
-            <h1 className="order-1 w-fit font-melodrama text-5xl text-center text-zinc-900">Your Pantry</h1>
+        <header className="flex flex-col md:flex-row h-fit md:items-center md:justify-between py-5 gap-3 md:gap-0">
+            <h1 className="order-1 w-fit font-melodrama text-5xl text-zinc-900">Your Pantry</h1>
             <SearchField />
 
             <div className="order-2 lg:order-3 flex items-center gap-4">

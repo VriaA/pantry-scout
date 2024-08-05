@@ -5,17 +5,13 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import { PantryContext, TPantryContext } from "@/contexts/PantryContext";
 import { useContext } from "react";
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
+import Loader from "@/components/Loader"
 
 export default function Pantry({ handleClickOpen }: { handleClickOpen: () => void }): JSX.Element {
     const { itemsToRender, loading, deleteItem, increaseQuantityByOne, decreaseQuantityByOne } = useContext(PantryContext) as TPantryContext
 
     if (!itemsToRender && loading) {
-        return <Box className="flex justify-center items-center w-full h-full">
-            <section className="flex flex-col items-center gap-3">
-                <CircularProgress />
-                <Typography sx={{ fontWeight: 500 }}>Loading...</Typography>
-            </section>
-        </Box>
+        return <Loader />
     }
 
     if (!itemsToRender || itemsToRender.length === 0) {

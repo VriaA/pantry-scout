@@ -6,9 +6,9 @@ import { useState } from "react";
 import * as React from 'react';
 import { useContext, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import FormModal from "@/components/FormModal";
-import Pantry from "@/components/Pantry";
-import Header from "@/components/Header"
+import FormModal from "@/components/pantry/FormModal";
+import Pantry from "@/components/pantry/Pantry";
+import Header from "@/components/pantry/Header"
 
 export default function Home() {
   const { signedInUser } = useContext(AppContext) as TAppContext

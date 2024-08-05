@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   const prompt = `Based on the following ingredients in my pantry: ${ingredients.join(
     ", "
   )}, 
-  generate recipes, return an array of a maximum of 5 objects containing the name, duration, description, ingredients and the steps to take to complete the recipe. The only text that should be returned is the text in the array of recipes.`;
+  generate recipes, return an array of a maximum of 10 objects containing the name, duration, description, ingredients and the steps to take to complete the recipe. The only text that should be returned is the text in the array of recipes.`;
 
   try {
     const response = await openai.chat.completions.create({

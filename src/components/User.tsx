@@ -56,6 +56,7 @@ export default function User({ style }: TUser) {
     const toggleUserMenuVisibility = (): void =>
         setIsUserMenuOpen((prev) => !prev);
 
+    const USER_BG = !signedInUser?.photoURL ? 'bg-cta-primary hover:animate-cta-gradient' : ''
     return (
         <div
             className={`${style} relative overflow-visible`}
@@ -76,7 +77,7 @@ export default function User({ style }: TUser) {
                 title="User menu"
                 onClick={toggleUserMenuVisibility}
                 ref={triggerRef}
-                className="grid place-content-center w-10 h-10 bg-zinc-900/40 rounded-full cursor-pointer hover:bg-zinc-900/70 overflow-hidden transition-all hover:-translate-y-[2px] active:translate-y-[2px]"
+                className={`${USER_BG} grid place-content-center w-10 h-10 rounded-full cursor-pointer overflow-hidden transition-all hover:-translate-y-[2px] active:translate-y-[2px]`}
             >
                 {signedInUser?.photoURL ? (
                     <img
@@ -91,7 +92,7 @@ export default function User({ style }: TUser) {
                         viewBox="0 0 448 512"
                     >
                         <path
-                            fill="#ff4207"
+                            fill="#18181b"
                             d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"
                         />
                     </svg>
@@ -172,7 +173,7 @@ export default function User({ style }: TUser) {
             )}
 
             <dialog
-                className={`${isDeleteDialogOpen ? "flex" : ""} fixed inset-0 m-auto flex-col gap-6 w-[70%] max-w-[300px] p-5 backdrop:bg-zinc-900/40 font-manrope rounded-lg border border-zinc-900`}
+                className={`${isDeleteDialogOpen ? "flex" : ""} fixed inset-0 m-auto flex-col gap-6 w-[70%] max-w-[300px] p-5 backdrop:bg-zinc-900/40 font-manrope rounded-lg`}
                 ref={deleteDialogRef}
             >
                 <p className="text-base  font-medium tracking-wide">
