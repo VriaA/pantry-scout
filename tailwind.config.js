@@ -16,7 +16,7 @@ module.exports = {
       fontFamily: {
         melodrama: "Melodrama-Variable",
         manrope: [
-          "Manrope",
+          "var(--font-manrope)",
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",
