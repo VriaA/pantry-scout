@@ -2,6 +2,7 @@
 
 import { NextResponse, NextRequest } from "next/server";
 import openai from "@/libs/openai";
+import getRecipiesPrompt from "./prompt";
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
@@ -16,10 +17,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const prompt = `Based on the following ingredients in my pantry: ${ingredients.join(
-    ", "
-  )}, 
-  generate recipes, return an array of a maximum of 10 objects containing the name, duration, description, ingredients and the steps to take to complete the recipe. The only text that should be returned is the text in the array of recipes.`;
+  const prompt = getRecipiesPrompt(ingredients);
 
   try {
     const response = await fetchWithRetry(
@@ -40,19 +38,8 @@ export async function GET(req: NextRequest) {
       3
     );
 
-    const responseText = response.choices[0].message.content;
-    const jsonEnd = (responseText as string).lastIndexOf("}") + 3;
-    const jsonStart = (responseText as string).indexOf("[");
-    console.log(responseText);
-    if (jsonStart === -1 || jsonEnd === -1) {
-      throw new Error("JSON block not found in response");
-    }
-
-    const jsonResponse = JSON.parse(
-      responseText?.substring(jsonStart, jsonEnd) as string
-    );
-
-    return NextResponse.json(jsonResponse);
+    const responseText = JSON.parse(response.choices[0].message.content);
+    return NextResponse.json(responseText);
   } catch (error: any) {
     return NextResponse.json(
       { message: "Failed to fetch recipes" },

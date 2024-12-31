@@ -37,7 +37,7 @@ export default function RecipiesContextProvider({ children }: { children: ReactN
             if ((recipes && recipes.length > 0) || !signedInUser || !pantryItems || !ingredients) return
             setLoading(() => true)
             try {
-                const response = await fetch(`/api/openai?ingredients=${encodeURIComponent(ingredients)}`)
+                const response = await fetch(`/api/recipes?ingredients=${encodeURIComponent(ingredients)}`)
                 const data = await response.json()
                 setRecipes(() => data)
             } catch (error: any) {
