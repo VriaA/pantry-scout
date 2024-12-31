@@ -1,3 +1,5 @@
+"use server";
+
 import openai from "@/libs/openai";
 
 export default async function classifier(url: string | ImageData | undefined) {

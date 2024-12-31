@@ -1,3 +1,5 @@
+"use server";
+
 import { NextResponse, NextRequest } from "next/server";
 import openai from "@/libs/openai";
 
