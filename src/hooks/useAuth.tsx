@@ -16,48 +16,28 @@ import {
     reauthenticateWithPopup,
     UserCredential,
 } from "firebase/auth";
+import { UseAuthValues, NewUser, AuthErrorObject } from "@/types/auth";
 
 import { usePathname, useRouter } from 'next/navigation'
 import { AppContext } from "@/contexts/AppContext";
 import { TAppContext } from "@/types/app"
 import { PantryContext, TPantryContext } from "@/contexts/PantryContext"
 
-type newUser = {
-    email: string;
-    password: string;
-    confirmPassword: string;
-};
 
-type TAuthError = {
-    isMessageShown: boolean;
-    message: string | null;
-};
 
-export type TUseAuth = {
-    isDeleteAccount: boolean;
-    isSignIn: boolean;
-    isSignUp: boolean;
-    newUser: newUser;
-    authError: TAuthError;
-    loading: boolean;
-    updateUserDataOnChange: (e: FormEvent) => void;
-    authenticateWithGoogle: () => Promise<any>
-    authenticateWithEmailAndPassword: (e: FormEvent) => void;
-}
-
-export function useAuth(): TUseAuth {
+export function useAuth(): UseAuthValues {
     const provider = new GoogleAuthProvider();
     const pathname = usePathname();
     const isSignIn = pathname === "/sign-in";
     const isSignUp = pathname === "/sign-up";
     const isDeleteAccount = pathname === "/delete-account";
     const router = useRouter();
-    const [newUser, setNewUser] = useState<newUser>({
+    const [newUser, setNewUser] = useState<NewUser>({
         email: "",
         password: "",
         confirmPassword: "",
     });
-    const [authError, setAuthError] = useState<TAuthError>(() => ({
+    const [authError, setAuthError] = useState<AuthErrorObject>(() => ({
         isMessageShown: false,
         message: null,
     }));
@@ -207,7 +187,7 @@ export function useAuth(): TUseAuth {
     }
 
     function clearUserDetails(form: HTMLFormElement): void {
-        setNewUser((prevUser): newUser => {
+        setNewUser((prevUser): NewUser => {
             prevUser = { email: "", password: "", confirmPassword: "" };
             return prevUser;
         });
