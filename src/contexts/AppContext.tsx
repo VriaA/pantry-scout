@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/libs/firebase";
 import { TAppContext, TDialog } from "@/types/app";
+import { useRouter } from "next/navigation";
 export const AppContext = createContext<TAppContext | null>(null)
 
 export default function AppContextProvider({ children }: { children: ReactNode }): JSX.Element {
@@ -15,6 +16,7 @@ export default function AppContextProvider({ children }: { children: ReactNode }
         isOpen: false,
     });
     const dialogRef = useRef<HTMLDialogElement | null>(null);
+    const router = useRouter()
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -22,6 +24,12 @@ export default function AppContextProvider({ children }: { children: ReactNode }
             setSignedInUser(() => user);
         });
     }, []);
+
+    useEffect(() => {
+        if (signedInUser === null) {
+          router.push("/sign-in")
+        }
+    }, [signedInUser, router])
 
     function openDialog(): void {
         setDialog((prevDialog) => ({ ...prevDialog, ["isOpen"]: true }));
