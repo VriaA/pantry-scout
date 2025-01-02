@@ -21,7 +21,7 @@ export default function RecipeDetails(): JSX.Element | undefined {
         </main>
     } else {
 
-        const recipe = (recipes as TRecipe[]).find((recipe, i) => i === index)
+        const recipe = (recipes as TRecipe[]).find((_, i) => i === index)
         const { name, description, duration, steps, ingredients } = recipe as TRecipe
 
         return (

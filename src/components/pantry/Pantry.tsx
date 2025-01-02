@@ -1,5 +1,5 @@
 "use client";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { PantryContext, TPantryContext } from "@/contexts/PantryContext";

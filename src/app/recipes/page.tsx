@@ -1,7 +1,7 @@
 "use client"
 
 import { RecipesContext, TRecipesContext } from "@/contexts/RecipesContext";
-import { Box, Container, Typography, CircularProgress } from "@mui/material"
+import { Container, Typography, CircularProgress } from "@mui/material"
 import { FaBoxOpen } from "react-icons/fa";
 import { useContext } from "react";
 import Link from "next/link";

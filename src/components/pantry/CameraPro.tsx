@@ -1,7 +1,7 @@
 "use client"
 import { Camera, CameraType } from "react-camera-pro";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Box, Button, Skeleton, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import CameraIcon from '@mui/icons-material/Camera';
 import { PantryContext, TPantryContext } from "@/contexts/PantryContext";
 import { CircularProgress } from '@mui/material';
