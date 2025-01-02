@@ -40,8 +40,8 @@ export default function RecipeDetails(): JSX.Element | undefined {
                         <Link
                             className="group grid place-content-center w-10 h-10 bg-cta-primary hover:animate-cta-gradient rounded-full transition-all hover:-translate-y-[2px] active:translate-y-[2px]"
                             href="/recipes"
-                            aria-label="Recipies"
-                            title="Recipies">
+                            aria-label="Recipes"
+                            title="Recipes">
                             <PiChefHat
                                 className="text-2xl text-zinc-900" />
                         </Link>

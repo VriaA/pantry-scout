@@ -1,4 +1,4 @@
-export default function getRecipiesPrompt(ingredients: string[]) {
+export default function getRecipesPrompt(ingredients: string[]) {
   return `Based on the following ingredients in my pantry: ${ingredients.join(
     ", "
   )}, 

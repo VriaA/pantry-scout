@@ -22,7 +22,7 @@ export type TRecipesContext = {
 
 export const RecipesContext = createContext<TRecipesContext | null>(null)
 
-export default function RecipiesContextProvider({ children }: { children: ReactNode }): JSX.Element {
+export default function RecipesContextProvider({ children }: { children: ReactNode }): JSX.Element {
     const { setDialog, openDialog, signedInUser } = useContext(AppContext) as TAppContext
     const { pantryItems } = useContext(PantryContext) as TPantryContext
     const [loading, setLoading] = useState<boolean>(false)

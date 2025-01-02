@@ -1,4 +1,4 @@
-import RecipiesContextProvider from "@/contexts/RecipesContext"
+import RecipesContextProvider from "@/contexts/RecipesContext"
 
 export default function RecipesLayout({
     children,
@@ -6,8 +6,8 @@ export default function RecipesLayout({
     children: React.ReactNode;
 }>): JSX.Element {
     return (
-        <RecipiesContextProvider>
+        <RecipesContextProvider>
             {children}
-        </RecipiesContextProvider>
+        </RecipesContextProvider>
     )
 }

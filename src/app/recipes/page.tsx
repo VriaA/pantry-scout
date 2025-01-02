@@ -51,7 +51,7 @@ export default function Recipes(): JSX.Element {
     return (
         <Container sx={{ display: 'flex', flexDirection: 'column', height: '100svh' }}>
             <header className="flex flex-col md:flex-row md:items-center md:justify-between h-fit py-5 gap-3 md:gap-0">
-                <h1 className="order-1 w-fit font-melodrama text-5xl text-zinc-900">Your Recipies</h1>
+                <h1 className="order-1 w-fit font-melodrama text-5xl text-zinc-900">Your Recipes</h1>
 
                 <div className="order-2 lg:order-3 flex items-center gap-4">
                     <Link

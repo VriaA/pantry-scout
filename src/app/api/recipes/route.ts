@@ -2,7 +2,7 @@
 
 import { NextResponse, NextRequest } from "next/server";
 import openai from "@/libs/openai";
-import getRecipiesPrompt from "./prompt";
+import getRecipesPrompt from "./prompt";
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const prompt = getRecipiesPrompt(ingredients);
+  const prompt = getRecipesPrompt(ingredients);
 
   try {
     const response = await fetchWithRetry(
