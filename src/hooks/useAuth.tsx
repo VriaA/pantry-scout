@@ -54,7 +54,7 @@ export function useAuth(): UseAuthValues {
         setNewUser((prevUser) => ({ ...prevUser, [key]: value }));
     }
 
-    function authenticateWithEmailAndPassword(e: FormEvent) {
+    async function authenticateWithEmailAndPassword(e: FormEvent) {
         e.preventDefault();
         const form = e.target as HTMLFormElement;
         const { email, password, confirmPassword } = newUser;
@@ -69,12 +69,12 @@ export function useAuth(): UseAuthValues {
         } else {
             setLoading(true);
             if (isSignIn) {
-                signIn(email, password, form);
+                await signIn(email, password, form);
             } else if (isSignUp) {
-                createAccount(email, password, form);
+                await createAccount(email, password, form);
             } else {
                 const credential = EmailAuthProvider.credential(email, password);
-                deleteAccount(auth.currentUser as User, "emailAndPassword", credential);
+                await deleteAccount(auth.currentUser as User, "emailAndPassword", credential);
             }
         }
     }
@@ -153,14 +153,14 @@ export function useAuth(): UseAuthValues {
         }
     }
 
-    function deleteUserPantryDate() {
+    async function deleteUserPantryDate() {
         if (!pantryItems) return;
-        const promises = pantryItems.map((item) =>
+        const promises = pantryItems.map( (item) =>
             deleteDoc(doc(db, "pantry", item.docId)),
         );
         setPantryItems(() => []);
         setItemsToRender(() => []);
-        return Promise.all(promises);
+        await Promise.all(promises);
     }
 
     async function createAccount(
