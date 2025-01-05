@@ -37,15 +37,13 @@ export default function Recipes(): JSX.Element {
     }
 
     const DataToRender = () => {
-        if (loading) {
+        if (loading === null || loading) {
             return <Loader message="Generating recipes" />
-        } else {
-            if (!recipes || recipes.length < 0) {
-                return <NoRecipes />
-            } else {
-                return <AllRecipes />
-            }
+        } 
+        if (!recipes || recipes.length < 0) {
+            return <NoRecipes />
         }
+        return <AllRecipes />
     }
 
     return (
